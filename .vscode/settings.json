@@ -1,0 +1,43 @@
+{
+	"files.exclude": {
+		".buckconfig": true,
+		".gitattributes": true,
+		".watchmanconfig": true
+	},
+	"eslint.format.enable": true,
+
+	"files.encoding": "utf8",
+	"files.autoGuessEncoding": false,
+
+	"search.exclude": {
+		"node_modules": true,
+		"ios/*/**": true,
+		"**.lock": true
+		// The more we blacklist, the better the search performance
+	},
+
+	"eslint.alwaysShowStatus": true,
+	"eslint.packageManager": "yarn",
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true,
+		"source.fixAll.tslint": true
+	},
+
+	"editor.rulers": [100], // A line on the left, should be the same as character limit in lint config
+	"editor.tabSize": 2, // 1 tab equals 2 space
+	"editor.insertSpaces": true, // Use spaces for tab
+	"editor.formatOnSave": true,
+
+	"typescript.validate.enable": true,
+	"typescript.preferences.importModuleSpecifier": "shortest",
+
+	"emmet.showExpandedAbbreviation": "never",
+
+	// Auto-rename-tag plugin
+	"auto-rename-tag.activationOnLanguage": [
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact"
+	]
+}
