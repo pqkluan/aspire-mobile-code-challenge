@@ -1,7 +1,6 @@
 import type { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { Platform } from 'react-native';
 
 import type { RootParamList } from '~/navigation';
 import DebitSpendingLimitScreen from '~/screens/DebitSpendingLimitScreen';
@@ -14,7 +13,7 @@ const noHeaderOption = { headerShown: false };
 
 const rootOptions: NativeStackNavigationOptions = {
 	headerBackTitleVisible: false,
-	animation: Platform.select({ ios: 'default', android: 'slide_from_right' }),
+	animation: 'fade',
 	animationTypeForReplace: 'push',
 	headerTitleAlign: 'center',
 	// This will prevent the navigation use the screen name as default title

@@ -50,7 +50,7 @@ function createTabBarLabel(label: string): BottomTabNavigationOptions['tabBarLab
 		const { focused } = props;
 
 		const theme = useTheme();
-		const color = focused ? props.color : theme.colors.disabled[500];
+		const color = focused ? props.color : theme.colors['ink-disabled'][500];
 
 		return (
 			<Text color={color} fontSize={9} fontWeight={focused ? 'semibold' : 'medium'}>
@@ -66,7 +66,7 @@ function createTabBarIcon(name: ScreenNames): BottomTabNavigationOptions['tabBar
 		const { focused } = props;
 
 		const theme = useTheme();
-		const color = focused ? props.color : theme.colors.disabled[500];
+		const color = focused ? props.color : theme.colors['ink-disabled'][500];
 
 		return <Component fill={color} height={24} width={24} />;
 	};

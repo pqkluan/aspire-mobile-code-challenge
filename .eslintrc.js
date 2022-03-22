@@ -23,6 +23,8 @@ module.exports = {
 		},
 	],
 	rules: {
+		'curly': ['error', 'multi-or-nest', 'consistent'],
+
 		'@typescript-eslint/consistent-type-imports': [
 			'error',
 			{ prefer: 'type-imports', disallowTypeAnnotations: true },
@@ -41,8 +43,7 @@ module.exports = {
 		],
 		'react/jsx-curly-brace-presence': ['error', 'always'],
 
-		// TODO: Enable after setup theme
-		// 'react-native/no-color-literals': ['warning'],
+		'react-native/no-color-literals': ['warn'],
 
 		'react-native/no-unused-styles': ['error'],
 		'react-native/no-single-element-style-arrays': ['error'],

@@ -14,9 +14,7 @@ interface Props {
  * This component is purely for iOS, to mimic Android keyboard push content up behavior.
  */
 const KeyboardPadding: FC<Props> = (props) => {
-	if (Platform.OS !== 'ios') {
-		return <View />;
-	}
+	if (Platform.OS !== 'ios') return <View />;
 
 	return <IOSKeyboardPadding {...props} />;
 };

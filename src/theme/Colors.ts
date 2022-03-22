@@ -1,5 +1,4 @@
 const Colors = {
-	// primary
 	'malachite': {
 		'50': '#f2fdf7',
 		'100': '#e6faf0',
@@ -12,7 +11,6 @@ const Colors = {
 		'800': '#017d3e',
 		'900': '#006632',
 	},
-	// accent
 	'prussian-blue': {
 		'50': '#f3f5f7',
 		'100': '#e7ebef',
@@ -25,7 +23,6 @@ const Colors = {
 		'800': '#072036',
 		'900': '#061a2c',
 	},
-	// ink
 	'cloud-burst': {
 		'50': '#f4f5f7',
 		'100': '#e9ebef',
@@ -38,7 +35,6 @@ const Colors = {
 		'800': '#161f39',
 		'900': '#12192f',
 	},
-	// body 40%
 	'shark': {
 		'50': '#f4f4f4',
 		'100': '#e9e9e9',
@@ -51,8 +47,6 @@ const Colors = {
 		'800': '#141414',
 		'900': '#111111',
 	},
-
-	// button disabled
 	'gallery': {
 		'50': '#fefefe',
 		'100': '#fdfdfd',
@@ -65,7 +59,6 @@ const Colors = {
 		'800': '#8f8f8f',
 		'900': '#757575',
 	},
-
 	// border
 	'mercury': {
 		'50': '#fefefe',
@@ -79,8 +72,6 @@ const Colors = {
 		'800': '#898989',
 		'900': '#707070',
 	},
-
-	// text-disabled
 	'alto': {
 		'50': '#fdfdfd',
 		'100': '#fcfcfc',

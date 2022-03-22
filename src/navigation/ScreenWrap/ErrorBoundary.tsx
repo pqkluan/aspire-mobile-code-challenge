@@ -19,9 +19,8 @@ export class ErrorBoundary extends React.Component<Props, State> {
 	}
 
 	render() {
-		if (this.state.hasError) {
-			return <Status500 />;
-		}
+		if (this.state.hasError) return <Status500 />;
+
 		return this.props.children;
 	}
 }

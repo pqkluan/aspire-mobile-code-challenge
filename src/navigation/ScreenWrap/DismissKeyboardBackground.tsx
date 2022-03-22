@@ -7,9 +7,7 @@ type Props = {
 };
 
 const DismissKeyboardBackground: FC<Props> = (props) => {
-	if (props.disabled) {
-		return <View style={styles.container}>{props.children}</View>;
-	}
+	if (props.disabled) return <View style={styles.container}>{props.children}</View>;
 
 	return (
 		<TouchableWithoutFeedback

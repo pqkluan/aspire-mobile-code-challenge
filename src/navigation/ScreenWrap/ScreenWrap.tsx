@@ -64,12 +64,8 @@ export function ScreenWrap(props: PropsWithChildren<Props>): JSX.Element {
 
 	const edges = useMemo<Edge[]>(() => {
 		const insets: Edge[] = ['left', 'right'];
-		if (enableTopSafeArea) {
-			insets.push('top');
-		}
-		if (!disableBottomSafeArea) {
-			insets.push('bottom');
-		}
+		if (enableTopSafeArea) insets.push('top');
+		if (!disableBottomSafeArea) insets.push('bottom');
 		return insets;
 	}, [disableBottomSafeArea, enableTopSafeArea]);
 

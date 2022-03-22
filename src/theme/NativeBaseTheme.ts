@@ -9,9 +9,12 @@ import Colors from './Colors';
 
 const nativeBaseTheme = extendTheme({
 	colors: {
-		primary: Colors.malachite,
-		secondary: Colors['prussian-blue'],
-		disabled: Colors.alto,
+		'primary': Colors.malachite,
+		'secondary': Colors['prussian-blue'],
+		'disabled': Colors.gallery,
+		'ink-blue': Colors['cloud-burst'],
+		'ink-dark': Colors.shark,
+		'ink-disabled': Colors.alto,
 	},
 
 	fontConfig: {
