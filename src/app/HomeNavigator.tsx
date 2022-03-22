@@ -48,14 +48,12 @@ const screenOptions: Record<ScreenNames, BottomTabNavigationOptions> = {
 function createTabBarLabel(label: string): BottomTabNavigationOptions['tabBarLabel'] {
 	return function TabBarLabel(props): JSX.Element {
 		const { focused } = props;
-		const theme = useTheme();
-		const color = focused ? theme.colors.primary[500] : theme.colors.disabled[500];
 
-		// TODO:
-		// font family Avenir Next Medium for unfocused
-		// font family Avenir Next Demi Bold for focused
+		const theme = useTheme();
+		const color = focused ? props.color : theme.colors.disabled[500];
+
 		return (
-			<Text color={color} fontSize={9} lineHeight={11}>
+			<Text color={color} fontSize={9} fontWeight={focused ? 'semibold' : 'medium'}>
 				{label}
 			</Text>
 		);
@@ -66,8 +64,9 @@ function createTabBarIcon(name: ScreenNames): BottomTabNavigationOptions['tabBar
 	return function TabBarIcon(props): JSX.Element {
 		const Component = BottomTabSVGs[name];
 		const { focused } = props;
+
 		const theme = useTheme();
-		const color = focused ? theme.colors.primary[500] : theme.colors.disabled[500];
+		const color = focused ? props.color : theme.colors.disabled[500];
 
 		return <Component fill={color} height={24} width={24} />;
 	};
@@ -75,7 +74,7 @@ function createTabBarIcon(name: ScreenNames): BottomTabNavigationOptions['tabBar
 
 const HomeNavigator: FC = () => {
 	// Note: initial tab should be home, but it was set to DebitCard for challenge purpose
-	const initialRouteName = 'DebitCard';
+	const initialRouteName = DebitCardScreen.displayName;
 
 	return (
 		<BottomTabsNavigator.Navigator

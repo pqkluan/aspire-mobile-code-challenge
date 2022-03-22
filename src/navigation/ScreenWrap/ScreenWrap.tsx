@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationOptions } from '@react-navigation/native-stack';
+import { useTheme } from 'native-base';
 import type { PropsWithChildren } from 'react';
 import React, { useEffect, useMemo } from 'react';
 import type { StatusBarStyle, StyleProp, ViewStyle } from 'react-native';
@@ -39,11 +40,15 @@ interface Props extends Omit<NativeStackNavigationOptions, 'statusBarStyle'> {
  * @returns
  */
 export function ScreenWrap(props: PropsWithChildren<Props>): JSX.Element {
+	const theme = useTheme();
+
+	// TODO: default nav bar scheme?
+
 	const {
 		children,
 		style,
-		statusBarStyle = 'dark-content',
-		statusBarBgColor = '#FFF',
+		statusBarStyle = 'light-content',
+		statusBarBgColor = theme.colors.secondary[500],
 		enableTopSafeArea = false,
 		disableBottomSafeArea = false,
 		enableKbDismiss = false,
