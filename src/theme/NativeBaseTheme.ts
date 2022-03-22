@@ -5,8 +5,14 @@
 
 import { extendTheme } from 'native-base';
 
+import Colors from './Colors';
+
 const nativeBaseTheme = extendTheme({
-	colors: {},
+	colors: {
+		primary: Colors.malachite,
+		secondary: Colors['prussian-blue'],
+		disabled: Colors.alto,
+	},
 
 	fontConfig: {},
 
