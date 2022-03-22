@@ -4,11 +4,11 @@ import PlaceholderContent from '~/components/PlaceholderContent';
 import { createScreen } from '~/navigation';
 
 export default createScreen(
-	'Payment',
+	'Payments',
 	(props) => {
 		const {} = props;
 
-		return <PlaceholderContent text={'Payment Screen'} />;
+		return <PlaceholderContent text={'Payments Screen'} />;
 	},
 	{ disableBottomSafeArea: true },
 );

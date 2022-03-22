@@ -7,8 +7,10 @@ import type { HomeParamList } from '~/navigation';
 import CreditScreen from '~/screens/CreditScreen';
 import DebitCardScreen from '~/screens/DebitCardScreen';
 import HomeScreen from '~/screens/HomeScreen';
-import PaymentScreen from '~/screens/PaymentScreen';
 import ProfileScreen from '~/screens/ProfileScreen';
+
+import PaymentsScreen from '~/screens/PaymentsScreen';
+import BottomTabSVGs from '~/svg/bottom-tabs';
 
 const BottomTabsNavigator = createBottomTabNavigator<HomeParamList>();
 
@@ -18,38 +20,43 @@ const navigatorOptions = {
 
 type ScreenNames = keyof HomeParamList;
 
-const Screens = [HomeScreen, DebitCardScreen, PaymentScreen, CreditScreen, ProfileScreen] as const;
+const Screens = [HomeScreen, DebitCardScreen, PaymentsScreen, CreditScreen, ProfileScreen] as const;
 
 const screenOptions: Record<ScreenNames, BottomTabNavigationOptions> = {
 	Home: {
 		headerShown: false,
 		tabBarLabel: 'Home',
-		// tabBarIcon: createTabBarIcon('home'),
+		tabBarIcon: createTabBarIcon('Home'),
 	},
 	DebitCard: {
 		headerShown: false,
 		tabBarLabel: 'Debit Card',
+		tabBarIcon: createTabBarIcon('DebitCard'),
 	},
-	Payment: {
+	Payments: {
 		headerShown: false,
-		tabBarLabel: 'Payment',
+		tabBarLabel: 'Payments',
+		tabBarIcon: createTabBarIcon('Payments'),
 	},
 	Credit: {
 		headerShown: false,
 		tabBarLabel: 'Credit',
+		tabBarIcon: createTabBarIcon('Credit'),
 	},
 	Profile: {
 		headerShown: false,
 		tabBarLabel: 'Profile',
+		tabBarIcon: createTabBarIcon('Profile'),
 	},
 };
 
-// function createTabBarIcon(iconName: string) {
-// 	return function tabBarIcon(props: { color: string; size: number }): JSX.Element {
-// 		const { color, size } = props;
-// 		return <IconButton color={color} icon={iconName} size={size} />;
-// 	};
-// }
+function createTabBarIcon(iconName: ScreenNames) {
+	return function tabBarIcon(props: { color: string; size: number }): JSX.Element {
+		const { color, size } = props;
+		const Component = BottomTabSVGs[iconName];
+		return <Component width={size} height={size} fill={color} />;
+	};
+}
 
 const HomeNavigator: FC = () => {
 	return (

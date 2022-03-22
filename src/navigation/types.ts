@@ -14,7 +14,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 type HomeParamList = {
 	Home: undefined;
 	DebitCard: undefined;
-	Payment: undefined;
+	Payments: undefined;
 	Credit: undefined;
 	Profile: undefined;
 };
