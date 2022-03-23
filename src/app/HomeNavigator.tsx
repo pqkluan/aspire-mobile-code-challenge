@@ -4,6 +4,7 @@ import { Text, useTheme } from 'native-base';
 import type { FC } from 'react';
 import React from 'react';
 
+import { useScreenOptions } from '~/hooks';
 import type { HomeParamList } from '~/navigation';
 import CreditScreen from '~/screens/CreditScreen';
 import DebitCardScreen from '~/screens/DebitCardScreen';
@@ -13,10 +14,6 @@ import ProfileScreen from '~/screens/ProfileScreen';
 import BottomTabSVGs from '~/svg/bottom-tabs';
 
 const BottomTabsNavigator = createBottomTabNavigator<HomeParamList>();
-
-const navigatorOptions = {
-	headerShown: false,
-} as const;
 
 type ScreenNames = keyof HomeParamList;
 
@@ -28,6 +25,7 @@ const screenOptions: Record<ScreenNames, BottomTabNavigationOptions> = {
 		tabBarIcon: createTabBarIcon('Home'),
 	},
 	DebitCard: {
+		title: 'Debit Card',
 		tabBarLabel: createTabBarLabel('Debit Card'),
 		tabBarIcon: createTabBarIcon('DebitCard'),
 	},
@@ -49,11 +47,11 @@ function createTabBarLabel(label: string): BottomTabNavigationOptions['tabBarLab
 	return function TabBarLabel(props): JSX.Element {
 		const { focused } = props;
 
-		const theme = useTheme();
-		const color = focused ? props.color : theme.colors['ink-disabled'][500];
-
 		return (
-			<Text color={color} fontSize={9} fontWeight={focused ? 'semibold' : 'medium'}>
+			<Text
+				color={focused ? props.color : 'ink-disabled.500'}
+				fontSize={9}
+				fontWeight={focused ? 'semibold' : 'medium'}>
 				{label}
 			</Text>
 		);
@@ -76,10 +74,10 @@ const HomeNavigator: FC = () => {
 	// Note: initial tab should be home, but it was set to DebitCard for challenge purpose
 	const initialRouteName = DebitCardScreen.displayName;
 
+	const options = useScreenOptions(false);
+
 	return (
-		<BottomTabsNavigator.Navigator
-			initialRouteName={initialRouteName}
-			screenOptions={navigatorOptions}>
+		<BottomTabsNavigator.Navigator initialRouteName={initialRouteName} screenOptions={options}>
 			{Screens.map((ScreenComponent) => {
 				const screenName = ScreenComponent.displayName;
 				return (

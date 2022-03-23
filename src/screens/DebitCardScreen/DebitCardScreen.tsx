@@ -1,12 +1,14 @@
-import { Stack } from 'native-base';
+import { Box, Row, ScrollView, Stack, Text } from 'native-base';
 import type { ComponentProps } from 'react';
 import React, { useMemo } from 'react';
-import { Alert } from 'react-native';
+import { Alert, Platform } from 'react-native';
 
+import CurrencyBadge from '~/components/CurrencyBadge';
 import { createScreen } from '~/navigation';
 import DebitCardSVGs from '~/svg/debit-card-icons';
 
 import ActionRow from './ActionRow';
+import CardUI from './CardUI';
 
 type RowData = ComponentProps<typeof ActionRow>;
 
@@ -69,18 +71,42 @@ export default createScreen(
 		}, [navigation, spendingLimitEnabled]);
 
 		return (
-			<Stack backgroundColor={'secondary.500'} flex={1}>
-				<Stack
-					backgroundColor={'white'}
-					borderTopLeftRadius={'3xl'}
-					borderTopRightRadius={'3xl'}
-					flex={1}
-					marginTop={200}>
+			<ScrollView backgroundColor={'secondary.500'} showsVerticalScrollIndicator={false}>
+				<Text color={'white'} fontSize={'sm'} fontWeight={'medium'} marginTop={'3'} marginX={'6'}>
+					{'Available balance'}
+				</Text>
+
+				<Row alignItems={'center'} paddingX={'6'}>
+					<CurrencyBadge currency={'S$'} />
+
+					<Text
+						color={'white'}
+						fontSize={'2xl'}
+						fontWeight={'bold'}
+						marginLeft={'2'}
+						paddingTop={Platform.select({ android: '1.5' })}>
+						{'3,000'}
+					</Text>
+				</Row>
+
+				<Stack backgroundColor={'white'} borderTopRadius={'3xl'} marginTop={44}>
 					{rows.map((row) => (
 						<ActionRow key={row.title} {...row} />
 					))}
+
+					<Box backgroundColor={'primary.300'} height={1000} />
+					<Box backgroundColor={'red.500'} height={50} />
 				</Stack>
-			</Stack>
+
+				<CardUI
+					data={{
+						cardholderName: 'Mark Henry',
+						expirationDate: '12/20',
+						cardValidationCode: '456',
+						PAN: '5647341124132020',
+					}}
+				/>
+			</ScrollView>
 		);
 	},
 	{ disableBottomSafeArea: true },

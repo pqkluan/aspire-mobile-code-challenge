@@ -1,16 +1,15 @@
-import { Stack, Text } from 'native-base';
+import { Stack } from 'native-base';
 import React from 'react';
 
+import Title from '~/components/header/Title';
 import { createScreen } from '~/navigation';
 
 export default createScreen('DebitSpendingLimit', (props) => {
 	const {} = props;
 
 	return (
-		<React.Fragment>
-			<Stack flex={1} justifyContent={'center'}>
-				<Text textAlign={'center'}>{'Debit Spending Limit Screen'}</Text>
-			</Stack>
-		</React.Fragment>
+		<Stack backgroundColor={'secondary.500'} flex={1}>
+			<Title marginX={'6'}>{'Spending Limit'}</Title>
+		</Stack>
 	);
 });

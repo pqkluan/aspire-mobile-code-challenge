@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import React from 'react';
 
 import { navigationRef } from '~/navigation';
-import ReactNavigationTheme from '~/theme/ReactNavigationTheme';
+import { ReactNavigationTheme } from '~/theme';
 
 import NativeBaseProvider from './NativeBaseProvider';
 import { RootNavigator } from './RootNavigator';
