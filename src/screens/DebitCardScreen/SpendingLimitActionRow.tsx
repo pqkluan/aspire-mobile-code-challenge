@@ -9,6 +9,7 @@ import { useSessionState } from '~/hooks';
 import type { ScreenProps } from '~/navigation/types';
 import { sagas, selectors } from '~/redux';
 import DebitCardSVGs from '~/svg/debit-card-icons';
+import CurrencySymbols from '~/utils/CurrencySymbols';
 import formatNumber from '~/utils/formatNumber';
 
 import ActionRow from './ActionRow';
@@ -23,6 +24,7 @@ const SpendingLimitActionRow: FC<Props> = (props) => {
 
 	const { loading } = useSessionState(sagas.debit.disableSpendingLimit.type);
 	const currency = useSelector(selectors.debit.currency);
+	const currencySymbol = CurrencySymbols[currency].symbol;
 
 	const { spendingLimitEnabled, spendingLimitAmount } = useSelector(selectors.debit.spendingLimit);
 
@@ -36,7 +38,7 @@ const SpendingLimitActionRow: FC<Props> = (props) => {
 	}, [dispatch, spendingLimitEnabled]);
 
 	const desc = spendingLimitEnabled
-		? `Your weekly spending limit is ${currency} ${formatNumber(spendingLimitAmount)}`
+		? `Your weekly spending limit is ${currencySymbol} ${formatNumber(spendingLimitAmount)}`
 		: "You haven't set any spending limit on card";
 
 	return (
