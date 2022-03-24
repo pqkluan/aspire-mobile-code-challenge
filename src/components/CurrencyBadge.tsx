@@ -3,12 +3,17 @@ import type { FC } from 'react';
 import React from 'react';
 import { Platform } from 'react-native';
 
+import type { SupportCurrency } from '~/types/debit-card';
+import CurrencySymbols from '~/utils/CurrencySymbols';
+
 type Props = {
-	currency: string;
+	currency: SupportCurrency;
 };
 
 const CurrencyBadge: FC<Props> = (props) => {
 	const { currency } = props;
+
+	const currencySymbol = CurrencySymbols[currency].symbol;
 
 	return (
 		<Box
@@ -20,7 +25,7 @@ const CurrencyBadge: FC<Props> = (props) => {
 			paddingTop={Platform.select({ android: '0.5' })}
 			width={'10'}>
 			<Text color={'white'} fontSize={13} fontWeight={'bold'}>
-				{currency}
+				{currencySymbol}
 			</Text>
 		</Box>
 	);

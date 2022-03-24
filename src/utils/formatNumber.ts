@@ -7,7 +7,17 @@ type Options = { locales?: string | string[] } & Intl.NumberFormatOptions;
  */
 export default function formatNumber(value: number, options: Options = {}): string {
 	// It'll be even better if we use device locale
-	const { locales = 'en-SG', maximumFractionDigits = 0, ...otherOptions } = options;
-	const formatter = new Intl.NumberFormat(locales, { maximumFractionDigits, ...otherOptions });
+	const {
+		locales = 'en-SG',
+		minimumFractionDigits = 0,
+		maximumFractionDigits = 0,
+		...otherOptions
+	} = options;
+
+	const formatter = new Intl.NumberFormat(locales, {
+		maximumFractionDigits,
+		minimumFractionDigits,
+		...otherOptions,
+	});
 	return formatter.format(value);
 }
