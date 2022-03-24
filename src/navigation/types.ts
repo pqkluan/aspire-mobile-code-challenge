@@ -21,7 +21,7 @@ type HomeParamList = {
 
 type RootParamList = {
 	HomeRoot: NavigatorScreenParams<HomeParamList>;
-	DebitSpendingLimit: undefined;
+	DebitSpendingLimit?: { defaultAmount?: number };
 	// More screens at root navigator
 };
 

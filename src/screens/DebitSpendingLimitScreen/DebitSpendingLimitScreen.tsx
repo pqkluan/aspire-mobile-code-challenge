@@ -1,10 +1,13 @@
-import { Button, Input, Row, Stack, Text, useTheme } from 'native-base';
+import { Button, FormControl, Input, Row, Stack, Text, useTheme } from 'native-base';
 import React, { useCallback, useState } from 'react';
 import { StyleSheet } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 import CurrencyBadge from '~/components/CurrencyBadge';
 import Title from '~/components/header/Title';
+import { useSessionState } from '~/hooks';
 import { createScreen } from '~/navigation';
+import { sagas, selectors } from '~/redux';
 import ComponentSVGs from '~/svg/components';
 import formatNumber from '~/utils/formatNumber';
 
@@ -16,18 +19,26 @@ export default createScreen(
 		const {} = props;
 
 		const theme = useTheme();
-
-		const [amount, setAmount] = useState<number>(0);
+		const dispatch = useDispatch();
+		const currency = useSelector(selectors.debit.currency);
+		const { loading, error } = useSessionState(sagas.debit.submitSpendingLimit.type);
+		const [amount, setAmount] = useState<number>(props.route.params?.defaultAmount ?? 0);
 
 		const handleAmountChange = useCallback((input: string) => {
 			try {
 				const parsedInput = Number(input.replace(/\D/g, ''));
 				if (typeof parsedInput === 'number') setAmount(parsedInput);
-			} catch (error) {}
+			} catch (e) {}
 		}, []);
 
 		const displayAmount = !amount || amount === 0 ? '' : formatNumber(amount);
 		const submittable = !!amount && typeof amount === 'number';
+
+		const handleSubmit = useCallback(() => {
+			dispatch(sagas.debit.submitSpendingLimit({ amount }));
+		}, [amount, dispatch]);
+
+		// TODO: fetch spending limit suggestion from API
 		const suggestions = [5000, 10000, 20000];
 
 		return (
@@ -42,22 +53,26 @@ export default createScreen(
 						</Text>
 					</Row>
 
-					<Input
-						InputLeftElement={<CurrencyBadge currency={'S$'} />}
-						autoCapitalize={'none'}
-						autoComplete={'off'}
-						autoCorrect={false}
-						color={'ink-dark.500'}
-						fontSize={24}
-						fontWeight={'bold'}
-						keyboardType={'number-pad'}
-						marginX={'6'}
-						maxLength={11}
-						value={displayAmount}
-						variant={'underlined'}
-						autoFocus
-						onChangeText={handleAmountChange}
-					/>
+					<FormControl isInvalid={!!error} paddingX={'6'}>
+						<Input
+							InputLeftElement={<CurrencyBadge currency={currency} />}
+							autoCapitalize={'none'}
+							autoComplete={'off'}
+							autoCorrect={false}
+							color={'ink-dark.500'}
+							fontSize={24}
+							fontWeight={'bold'}
+							isDisabled={loading}
+							isInvalid={!!error}
+							keyboardType={'number-pad'}
+							maxLength={11}
+							value={displayAmount}
+							variant={'underlined'}
+							autoFocus
+							onChangeText={handleAmountChange}
+						/>
+						<FormControl.ErrorMessage>{error}</FormControl.ErrorMessage>
+					</FormControl>
 
 					<Text
 						color={'ink-dark.500:alpha.40'}
@@ -67,13 +82,11 @@ export default createScreen(
 						marginX={'6'}>
 						{'Here weekly means the last 7 days - not the calendar week'}
 					</Text>
-
 					<Row marginTop={'8'} marginX={'6'} space={'3'}>
 						{suggestions.map((value) => (
 							<SuggestOption key={value} currency={'S$'} value={value} onPress={setAmount} />
 						))}
 					</Row>
-
 					<Button
 						_disabled={{
 							backgroundColor: 'disabled.500',
@@ -82,12 +95,14 @@ export default createScreen(
 						}}
 						_text={{ fontWeight: 'semibold', fontSize: 16 }}
 						alignSelf={'center'}
-						isDisabled={!submittable}
+						isDisabled={!submittable || loading}
+						isLoading={loading}
 						marginBottom={'6'}
 						marginTop={'auto'}
 						shadow={'2'}
 						style={styles.button}
-						width={300}>
+						width={300}
+						onPress={handleSubmit}>
 						{'Save'}
 					</Button>
 				</Stack>

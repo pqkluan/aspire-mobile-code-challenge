@@ -1,3 +1,4 @@
+import '~/api/MockServer';
 import { NavigationContainer } from '@react-navigation/native';
 import type { FC } from 'react';
 import React, { useState, useEffect } from 'react';
