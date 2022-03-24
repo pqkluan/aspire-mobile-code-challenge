@@ -9,6 +9,7 @@ interface DebitReducer {
 
 	cardData?: CardholderData;
 
+	spendingLimitSuggestions: number[];
 	spendingLimitEnabled: boolean;
 	spendingLimitAmount: number;
 	spentAmount: number;
@@ -21,6 +22,7 @@ const initialState: DebitReducer = {
 
 	cardData: undefined,
 
+	spendingLimitSuggestions: [],
 	spendingLimitEnabled: false,
 	spendingLimitAmount: 0,
 	spentAmount: 0,
@@ -31,11 +33,16 @@ const { name, actions, reducer } = createSlice({
 	initialState,
 	reducers: {
 		setDebitData(state, action: PayloadAction<Required<DebitReducer>>) {
+			// Note: I put all data into 1 API + 1 single action handle here
+			// But in real scenario, these data will be fetched from many API endpoints
+			// and will be handle by more specific actions
+
 			state.currency = action.payload.currency;
 			state.balanceAmount = action.payload.balanceAmount;
 
 			state.cardData = action.payload.cardData;
 
+			state.spendingLimitSuggestions = action.payload.spendingLimitSuggestions;
 			state.spendingLimitEnabled = action.payload.spendingLimitEnabled;
 			state.spendingLimitAmount = action.payload.spendingLimitAmount;
 			state.spentAmount = action.payload.spentAmount;
@@ -63,6 +70,9 @@ const selectors = {
 	},
 	cardData(state: State): CardholderData | undefined {
 		return state[name].cardData;
+	},
+	spendingLimitSuggestions(state: State): number[] {
+		return state[name].spendingLimitSuggestions;
 	},
 	spendingLimit(
 		state: State,

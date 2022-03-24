@@ -42,8 +42,6 @@ interface Props extends Omit<NativeStackNavigationOptions, 'statusBarStyle'> {
 export function ScreenWrap(props: PropsWithChildren<Props>): JSX.Element {
 	const theme = useTheme();
 
-	// TODO: default nav bar scheme?
-
 	const {
 		children,
 		style,

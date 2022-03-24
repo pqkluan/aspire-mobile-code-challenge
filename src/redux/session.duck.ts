@@ -3,8 +3,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { createSelectorCache } from './utils/createSelectorsCache';
 
-// TODO: should write test for this file since it'll be use a lots
-
 interface SessionReducer {
 	loadings: Record<string, boolean>;
 	errors: Record<string, string | undefined>;

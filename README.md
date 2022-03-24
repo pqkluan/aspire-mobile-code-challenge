@@ -23,16 +23,6 @@ Notes:
 > Typescript and Redux Saga are optional but recommended just because we are using them. Make sure your app can run on both iOS and Android
 ```
 
-## TODO
-
-- [x] Implement second screen UI
-- [ ] Implement the progress bar
-- [ ] Setup Redux
-- [ ] Setup Redux Stores
-- [ ] Setup Redux Saga
-- [ ] Setup Mock API
-- [ ] Add unit test for saga and utility files
-
 ## How to run the project
 
 ### Prerequisite
@@ -73,8 +63,6 @@ yarn ios
 
 ## Development guide
 
-WIP
-
 Visual Studio Code with plugins is recommended for best DX for this project.
 
 To run the tests:
@@ -88,6 +76,12 @@ To lint the project:
 ```sh
 yarn lint
 ```
+
+## API Mock
+
+[miragejs](https://miragejs.com/docs/getting-started/introduction/) was used to mock backend APIs.
+
+The mock file is locate at `src/api/MockServer.ts`
 
 ## Business requirements
 

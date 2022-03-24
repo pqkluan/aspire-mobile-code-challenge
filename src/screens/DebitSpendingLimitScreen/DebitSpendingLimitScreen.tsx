@@ -21,6 +21,7 @@ export default createScreen(
 		const theme = useTheme();
 		const dispatch = useDispatch();
 		const currency = useSelector(selectors.debit.currency);
+		const suggestions = useSelector(selectors.debit.spendingLimitSuggestions);
 		const { loading, error } = useSessionState(sagas.debit.submitSpendingLimit.type);
 		const [amount, setAmount] = useState<number>(props.route.params?.defaultAmount ?? 0);
 
@@ -37,9 +38,6 @@ export default createScreen(
 		const handleSubmit = useCallback(() => {
 			dispatch(sagas.debit.submitSpendingLimit({ amount }));
 		}, [amount, dispatch]);
-
-		// TODO: fetch spending limit suggestion from API
-		const suggestions = [5000, 10000, 20000];
 
 		return (
 			<Stack backgroundColor={'secondary.500'} flex={1}>

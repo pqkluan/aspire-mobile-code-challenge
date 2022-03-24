@@ -24,6 +24,7 @@ let cache = {
 						cardValidationCode: '456',
 						PAN: '5647 3411 2413 2020',
 					},
+					spendingLimitSuggestions: [5000, 10000, 20000],
 					spentAmount: 345,
 					spendingLimitAmount: cache.spendingLimitAmount,
 					spendingLimitEnabled: cache.spendingLimitEnabled,

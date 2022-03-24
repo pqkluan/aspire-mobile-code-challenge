@@ -37,8 +37,6 @@ const IOSKeyboardPadding: FC<Props> = (props) => {
 
 				setKbHeight(newHeight);
 
-				// TODO: improve animation to match iOS keyboard animation
-				// TODO: Try reanimated 2?
 				Animated.timing(animatedHeight, {
 					toValue: newHeight,
 					duration: 250,
