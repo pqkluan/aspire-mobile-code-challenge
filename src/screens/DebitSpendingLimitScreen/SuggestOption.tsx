@@ -2,6 +2,8 @@ import { Pressable, Text } from 'native-base';
 import type { FC } from 'react';
 import React, { useCallback } from 'react';
 
+import formatNumber from '~/utils/formatNumber';
+
 type Props = {
 	currency: string;
 	value: number;
@@ -25,7 +27,7 @@ const SuggestOption: FC<Props> = (props) => {
 			paddingY={'3'}
 			onPress={handelPress}>
 			<Text color={'primary.500'} fontSize={12} fontWeight={'semibold'}>
-				{`${currency} ${value}`}
+				{`${currency} ${formatNumber(value)}`}
 			</Text>
 		</Pressable>
 	);

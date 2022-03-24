@@ -6,6 +6,7 @@ import { Alert, Platform } from 'react-native';
 import CurrencyBadge from '~/components/CurrencyBadge';
 import { createScreen } from '~/navigation';
 import DebitCardSVGs from '~/svg/debit-card-icons';
+import formatNumber from '~/utils/formatNumber';
 
 import ActionRow from './ActionRow';
 import CardUI from './CardUI';
@@ -18,9 +19,9 @@ export default createScreen(
 		const { navigation } = props;
 
 		const spendingLimitEnabled = false;
-		// TODO: should have format current function and test it
 		const currency = 'S$';
-		const spendingLimitAmount = currency + ' 5,000';
+		const spendingLimitAmount = 5000;
+		const balanceAmount = 3000;
 
 		const cardData = {
 			cardholderName: 'Mark Henry',
@@ -45,7 +46,7 @@ export default createScreen(
 					SVGComponent: DebitCardSVGs.SpendingLimit,
 					title: 'Weekly spending limit',
 					desc: spendingLimitEnabled
-						? `Your weekly spending limit is ${spendingLimitAmount}`
+						? `Your weekly spending limit is ${currency} ${formatNumber(spendingLimitAmount)}`
 						: "You haven't set any spending limit on card",
 					onPress() {
 						navigation.navigate('DebitSpendingLimit');
@@ -93,7 +94,7 @@ export default createScreen(
 						fontWeight={'bold'}
 						marginLeft={'2'}
 						paddingTop={Platform.select({ android: '1.5' })}>
-						{'3,000'}
+						{formatNumber(balanceAmount)}
 					</Text>
 				</Row>
 

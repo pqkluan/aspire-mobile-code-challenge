@@ -1,11 +1,12 @@
 import { Button, Input, Row, Stack, Text, useTheme } from 'native-base';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { StyleSheet } from 'react-native';
 
 import CurrencyBadge from '~/components/CurrencyBadge';
 import Title from '~/components/header/Title';
 import { createScreen } from '~/navigation';
 import ComponentSVGs from '~/svg/components';
+import formatNumber from '~/utils/formatNumber';
 
 import SuggestOption from './SuggestOption';
 
@@ -16,10 +17,17 @@ export default createScreen(
 
 		const theme = useTheme();
 
-		const [amount, setAmount] = useState<number>();
+		const [amount, setAmount] = useState<number>(0);
 
+		const handleAmountChange = useCallback((input: string) => {
+			try {
+				const parsedInput = Number(input.replace(/\D/g, ''));
+				if (typeof parsedInput === 'number') setAmount(parsedInput);
+			} catch (error) {}
+		}, []);
+
+		const displayAmount = !amount || amount === 0 ? '' : formatNumber(amount);
 		const submittable = !!amount && typeof amount === 'number';
-
 		const suggestions = [5000, 10000, 20000];
 
 		return (
@@ -44,10 +52,11 @@ export default createScreen(
 						fontWeight={'bold'}
 						keyboardType={'number-pad'}
 						marginX={'6'}
-						value={amount ? String(amount) : ''}
+						maxLength={11}
+						value={displayAmount}
 						variant={'underlined'}
 						autoFocus
-						onChangeText={(text) => setAmount(Number(text))}
+						onChangeText={handleAmountChange}
 					/>
 
 					<Text
