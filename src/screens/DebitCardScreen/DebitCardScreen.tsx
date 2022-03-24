@@ -1,4 +1,4 @@
-import { Box, Row, ScrollView, Stack, Text } from 'native-base';
+import { Row, ScrollView, Stack, Text } from 'native-base';
 import type { ComponentProps } from 'react';
 import React, { useMemo } from 'react';
 import { Alert, Platform } from 'react-native';
@@ -19,7 +19,15 @@ export default createScreen(
 
 		const spendingLimitEnabled = false;
 		// TODO: should have format current function and test it
-		const spendingLimitAmount = 'S$ 5,000';
+		const currency = 'S$';
+		const spendingLimitAmount = currency + ' 5,000';
+
+		const cardData = {
+			cardholderName: 'Mark Henry',
+			expirationDate: '12/20',
+			cardValidationCode: '456',
+			PAN: '5647 3411 2413 2020',
+		};
 
 		const rows = useMemo<RowData[]>((): RowData[] => {
 			function handleMock() {
@@ -68,7 +76,7 @@ export default createScreen(
 					onPress: handleMock,
 				},
 			];
-		}, [navigation, spendingLimitEnabled]);
+		}, [navigation, spendingLimitAmount, spendingLimitEnabled]);
 
 		return (
 			<ScrollView backgroundColor={'secondary.500'} showsVerticalScrollIndicator={false}>
@@ -77,7 +85,7 @@ export default createScreen(
 				</Text>
 
 				<Row alignItems={'center'} paddingX={'6'}>
-					<CurrencyBadge currency={'S$'} />
+					<CurrencyBadge currency={currency} />
 
 					<Text
 						color={'white'}
@@ -89,23 +97,13 @@ export default createScreen(
 					</Text>
 				</Row>
 
-				<Stack backgroundColor={'white'} borderTopRadius={'3xl'} marginTop={44}>
+				<CardUI data={cardData} />
+
+				<Stack backgroundColor={'white'} height={'full'} paddingTop={'2'}>
 					{rows.map((row) => (
 						<ActionRow key={row.title} {...row} />
 					))}
-
-					<Box backgroundColor={'primary.300'} height={1000} />
-					<Box backgroundColor={'red.500'} height={50} />
 				</Stack>
-
-				<CardUI
-					data={{
-						cardholderName: 'Mark Henry',
-						expirationDate: '12/20',
-						cardValidationCode: '456',
-						PAN: '5647341124132020',
-					}}
-				/>
 			</ScrollView>
 		);
 	},

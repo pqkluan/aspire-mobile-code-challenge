@@ -23,6 +23,16 @@ Notes:
 > Typescript and Redux Saga are optional but recommended just because we are using them. Make sure your app can run on both iOS and Android
 ```
 
+## TODO
+
+- [x] Implement second screen UI
+- [ ] Implement the progress bar
+- [ ] Setup Redux
+- [ ] Setup Redux Stores
+- [ ] Setup Redux Saga
+- [ ] Setup Mock API
+- [ ] Add unit test for saga and utility files
+
 ## How to run the project
 
 ### Prerequisite
