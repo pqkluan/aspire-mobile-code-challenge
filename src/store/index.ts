@@ -19,46 +19,46 @@ import { rootReducer, storeNames } from '~/redux';
 const TAG = 'ReduxStore' as const;
 
 class ReduxStore {
-	#PERSIST_VERSION = 1;
+	private _PERSIST_VERSION = 1;
 
-	#store: Store<RootState, Action<string>>;
-	#persistor: Persistor | undefined;
-	#persistConfig: PersistConfig<RootState>;
+	private _store: Store<RootState, Action<string>>;
+	private _persistor: Persistor | undefined;
+	private _persistConfig: PersistConfig<RootState>;
 
 	constructor() {
 		// Note: this is an attempt to mute the possible undefined store
-		this.#store = {} as any;
-		this.#persistConfig = this.#getPersistConfig();
+		this._store = {} as any;
+		this._persistConfig = this._getPersistConfig();
 	}
 
 	public createStore(middlewares: Middleware<RootState>[]) {
-		this.#store = this.#createStore(this.#persistConfig, middlewares);
+		this._store = this._createStore(this._persistConfig, middlewares);
 	}
 
 	public get instance() {
-		return this.#store;
+		return this._store;
 	}
 
 	public get persistor() {
-		return this.#persistor;
+		return this._persistor;
 	}
 
 	public get getState() {
-		return this.#store?.getState;
+		return this._store?.getState;
 	}
 
 	public get dispatch() {
-		return this.#store?.dispatch;
+		return this._store?.dispatch;
 	}
 
 	public async rehydrateStore(): Promise<void> {
 		try {
-			if (!this.#store) throw new Error('Cannot rehydrate a undefined store');
+			if (!this._store) throw new Error('Cannot rehydrate a undefined store');
 
 			await new Promise<void>((resolve) => {
-				this.#persistor = persistStore(this.#store, undefined, resolve);
+				this._persistor = persistStore(this._store, undefined, resolve);
 			});
-			if (!this.#persistor) throw new Error('Failed to rehydrate redux store');
+			if (!this._persistor) throw new Error('Failed to rehydrate redux store');
 
 			console.info(TAG, 're-hydrated');
 		} catch (error) {
@@ -66,10 +66,10 @@ class ReduxStore {
 		}
 	}
 
-	#getPersistConfig(): PersistConfig<RootState> {
+	private _getPersistConfig(): PersistConfig<RootState> {
 		return {
 			key: 'root',
-			version: this.#PERSIST_VERSION,
+			version: this._PERSIST_VERSION,
 			storage: AsyncStorage,
 			debug: __DEV__,
 			blacklist: [
@@ -79,7 +79,7 @@ class ReduxStore {
 		};
 	}
 
-	#createStore(
+	private _createStore(
 		config: PersistConfig<RootState>,
 		middlewares: Middleware<RootState>[],
 	): Store<RootState, Action<string>> {

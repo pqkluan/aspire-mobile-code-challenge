@@ -31,7 +31,6 @@
 	},
 	"devDependencies": {
 		"@babel/core": "7.17.5",
-		"@babel/plugin-proposal-private-methods": "7.16.11",
 		"@babel/preset-env": "7.16.11",
 		"@babel/runtime": "7.17.2",
 		"@pqkluan/prettier-config": "1.0.8",
